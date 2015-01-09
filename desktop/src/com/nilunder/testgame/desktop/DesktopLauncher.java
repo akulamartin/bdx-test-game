@@ -7,9 +7,9 @@ import com.nilunder.testgame.BdxApp;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Project Name";
-		config.width = 666;
-		config.height = 444;
+		config.title = "Test Game";
+		config.width = 853;
+		config.height = 480;
 		new LwjglApplication(new BdxApp(), config);
 	}
 }
