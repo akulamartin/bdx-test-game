@@ -8,10 +8,12 @@ public class Scene extends Instantiator {
 	public GameObject newObject(JsonValue gobj){
 		String name = gobj.name;
 
-		if (name.equals("Crux"))
-			return new com.nilunder.testgame.Crux();
 		if (name.equals("Sacky"))
 			return new com.nilunder.testgame.Sacky();
+		if (name.equals("Player"))
+			return new com.nilunder.testgame.Player();
+		if (name.equals("Crux"))
+			return new com.nilunder.testgame.Crux();
 
 		return super.newObject(gobj);
 	}
