@@ -28,7 +28,7 @@ public class BdxApp implements ApplicationListener {
 		Gdx.input.setInputProcessor(new GdxProcessor(Bdx.keyboard, Bdx.mouse, Bdx.allocatedFingers));
 
 		Scene.instantiators = new HashMap<String, Instantiator>();
-		Scene.instantiators.put("Scene", new com.nilunder.testgame.inst.Scene());
+		Scene.instantiators.put("Scene", new com.nilunder.testgame.inst.iScene());
 
 		Bdx.scenes.add(new Scene("Scene"));
 	}
@@ -40,15 +40,21 @@ public class BdxApp implements ApplicationListener {
 
 	@Override
 	public void render() {
+		Bdx.profiler.start();
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Bdx.profiler.stop("graphics");
 
 		Bdx.updateInput();
+		Bdx.profiler.stop("input");
 
 		for (Scene s : (ArrayListNamed<Scene>)Bdx.scenes.clone()){
 			s.update();
+			Bdx.profiler.start();
 			renderScene(s);
+			Bdx.profiler.stop("render");
 		}
+		Bdx.profiler.update();
 	}
 	
 	
@@ -56,7 +62,7 @@ public class BdxApp implements ApplicationListener {
 		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
 		modelBatch.begin(scene.cam);
 		for (GameObject g : scene.objects){
-			if (g.visible && g.modelInstance != null){
+			if (g.visible()){
 				modelBatch.render(g.modelInstance);
 			}
 		}
