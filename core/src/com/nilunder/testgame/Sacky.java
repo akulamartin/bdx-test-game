@@ -69,14 +69,18 @@ private static class Animation extends Component{
 				sa.play("buzzed");
 			else
 				sa.play("normal");
+
+			sa.speed = 0.1f + g.velocity().length() / 3;
 		}
 	};
 }
 
 
 
+	private Boozing boozing;
+
 	public void init(){
-		Boozing boozing = new Boozing(this);
+		boozing = new Boozing(this);
 		components.add(new Animation(this, boozing));
 		components.add(boozing);
 		components.add(new Halo(children.get("G_Sacky")));
@@ -90,5 +94,9 @@ private static class Animation extends Component{
 		velocity(0, 0, 0);
 		applyForce(force);
 	}
-    
+
+	public boolean isNormal(){
+		return boozing.state == boozing.normal;
+	}
+
 }

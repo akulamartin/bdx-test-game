@@ -7,7 +7,7 @@ import javax.vecmath.*;
 public class Player extends GameObject{
 
 	public void main(){
-		if (Bdx.mouse.btnHit("left")){
+		if (Bdx.mouse.btnHit("left") && noBottlesInScene()){
 			GameObject bottle = scene.add("Bottle");
 			bottle.position(scene.camera.position());
 			Vector3f v = Bdx.mouse.rayDirection();
@@ -15,6 +15,10 @@ public class Player extends GameObject{
 			v.length(15);
 			bottle.velocity(v);
 		}
+	}
+
+	public boolean noBottlesInScene(){
+		return scene.objects.get("Bottle") == null;
 	}
 
 }
