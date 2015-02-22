@@ -6,6 +6,11 @@ import javax.vecmath.*;
 
 public class Player extends GameObject{
 
+	public void init(){
+		Bdx.scenes.add(0, new Scene("Clouds"));
+		Bdx.scenes.add(new Scene("HUD"));
+	}
+
 	public void main(){
 		if (Bdx.mouse.btnHit("left") && noBottlesInScene()){
 			GameObject bottle = scene.add("Bottle");

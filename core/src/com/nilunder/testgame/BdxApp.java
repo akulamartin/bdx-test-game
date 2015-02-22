@@ -28,9 +28,11 @@ public class BdxApp implements ApplicationListener {
 		Gdx.input.setInputProcessor(new GdxProcessor(Bdx.keyboard, Bdx.mouse, Bdx.allocatedFingers));
 
 		Scene.instantiators = new HashMap<String, Instantiator>();
-		Scene.instantiators.put("Scene", new com.nilunder.testgame.inst.iScene());
+		Scene.instantiators.put("Clouds", new com.nilunder.testgame.inst.iClouds());
+		Scene.instantiators.put("HUD", new com.nilunder.testgame.inst.iHUD());
+		Scene.instantiators.put("Main", new com.nilunder.testgame.inst.iMain());
 
-		Bdx.scenes.add(new Scene("Scene"));
+		Bdx.scenes.add(new Scene("Main"));
 	}
 
 	@Override

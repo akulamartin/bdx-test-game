@@ -8,7 +8,8 @@ public class Score extends Text{
 	private int score;
 
 	public void init(){
-		sacky = (Sacky)scene.objects.get("Sacky");
+		Scene mainScene = Bdx.scenes.get("Main");
+		sacky = (Sacky)mainScene.objects.get("Sacky");
 	}
 
 	public void main(){
