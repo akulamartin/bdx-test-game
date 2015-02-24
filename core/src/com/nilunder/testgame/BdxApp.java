@@ -32,7 +32,7 @@ public class BdxApp implements ApplicationListener {
 		Scene.instantiators.put("HUD", new com.nilunder.testgame.inst.iHUD());
 		Scene.instantiators.put("Main", new com.nilunder.testgame.inst.iMain());
 
-		Bdx.scenes.add(new Scene("Main"));
+		Bdx.scenes.add(new Scene("Clouds"));
 	}
 
 	@Override
