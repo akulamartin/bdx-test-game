@@ -47,6 +47,32 @@ private static class Boozing extends Component{
 	}
 }
 
+private static class Sound extends Component{
+
+	private float pz;
+
+	public Sound(Sacky sacky){
+		super(sacky);
+		state = core;
+		pz = g.position().z;
+	}
+
+	public State core = new State(){
+		public void main(){
+			if (g.hit("Bottle"))
+				Bdx.sounds.get("gulp").play();
+
+			float z = g.position().z;
+			float dz = Math.abs(pz - z);
+			pz = z;
+
+			if (g.hit("Platform") && dz > 0.01f){
+				Bdx.sounds.get("thud").play();
+			}
+		}
+	};
+}
+
 private static class Animation extends Component{
 	private SpriteAnim sa;
 	private Sacky sacky;
@@ -84,6 +110,7 @@ private static class Animation extends Component{
 		components.add(new Animation(this, boozing));
 		components.add(boozing);
 		components.add(new Halo(children.get("G_Sacky")));
+		components.add(new Sound(this));
 	}
 
 	public void jump(Vector3f direction){

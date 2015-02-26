@@ -19,6 +19,7 @@ public class Player extends GameObject{
 			v.z += 0.2;
 			v.length(15);
 			bottle.velocity(v);
+			Bdx.sounds.get("woosh").play();
 		}
 	}
 
