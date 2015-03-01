@@ -47,6 +47,42 @@ private static class Boozing extends Component{
 	}
 }
 
+public static class Shadow extends Component{
+
+	private GameObject shadow;
+	private float gobjHalfHeight;
+	private float baseScale;
+
+	public Shadow(GameObject g){
+		super(g);
+		shadow = g.scene.add("Shadow");
+		shadow.parent(g);
+		Vector3f gd = g.dimensions();
+		gobjHalfHeight = gd.z / 2;
+		Vector3f sd = shadow.dimensions();
+		baseScale = gd.x / sd.x;
+		state = core;
+	}
+
+	public State core = new State(){
+		public void main(){
+			Vector3f pos = g.position();
+			Vector3f v = new Vector3f(0, 0, -20);
+			RayHit rh = g.scene.ray(pos, v);
+
+			if (rh != null){
+				rh.position.z += 0.01;
+				shadow.position(rh.position);
+				float delta = rh.position.minus(pos).length() - gobjHalfHeight;
+				float scale = baseScale - delta / 7;
+				shadow.scale(scale > 0 ? scale : 0.01f);
+			}else{
+				shadow.position(pos.plus(v));
+			}
+		}
+	};
+}
+
 private static class Sound extends Component{
 
 	private float pz;
@@ -111,6 +147,7 @@ private static class Animation extends Component{
 		components.add(boozing);
 		components.add(new Halo(children.get("G_Sacky")));
 		components.add(new Sound(this));
+		components.add(new Shadow(this));
 	}
 
 	public void jump(Vector3f direction){
