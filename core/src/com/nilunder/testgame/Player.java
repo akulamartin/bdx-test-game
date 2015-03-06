@@ -6,13 +6,16 @@ import javax.vecmath.*;
 
 public class Player extends GameObject{
 
+	public boolean canThrowBottles;
+
 	public void init(){
 		Bdx.scenes.add(0, new Scene("Clouds"));
 		Bdx.scenes.add(new Scene("HUD"));
+		canThrowBottles = false;
 	}
 
 	public void main(){
-		if (Bdx.mouse.btnHit("left") && noBottlesInScene()){
+		if (canThrowBottles && Bdx.mouse.btnHit("left") && noBottlesInScene()){
 			GameObject bottle = scene.add("Bottle");
 			bottle.position(scene.camera.position());
 			Vector3f v = Bdx.mouse.rayDirection();

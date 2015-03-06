@@ -10,6 +10,8 @@ public class iHUD extends Instantiator {
 
 		if (name.equals("Score"))
 			return new com.nilunder.testgame.Score();
+		if (name.equals("HUD"))
+			return new com.nilunder.testgame.HUD();
 
 		return super.newObject(gobj);
 	}
